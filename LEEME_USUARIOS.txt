@@ -1,0 +1,34 @@
+USUARIOS, ADMINISTRADOR Y UBICACION DEL EQUIPO (v1.5)
+
+PASO 1 - Crear el proyecto (una sola vez, gratis)
+1. Entra a https://supabase.com e inicia sesion con tu cuenta de GitHub.
+2. "New project": ponle un nombre (ej. cajas-gpon), inventa una contrasena de base de datos (guardala), elige la region mas cercana
+   (por ejemplo "East US") y crea el proyecto. Tarda 1-2 minutos.
+
+PASO 2 - Crear las tablas y el administrador
+1. En el menu izquierdo abre "SQL Editor" > "New query".
+2. Abre el archivo supabase/setup.sql, copia TODO su contenido, pegalo y pulsa "Run". Debe decir "Success".
+   (Si lo ejecutas dos veces no pasa nada: no borra datos.)
+
+PASO 3 - Copiar los datos de conexion
+1. Menu izquierdo: "Project Settings" > "API" (o "Data API").
+2. Copia la "Project URL" (https://xxxx.supabase.co) y la clave publica: "anon public" (empieza con eyJ...) o "publishable" (sb_publishable_...).
+   NUNCA uses la clave "service_role" / "secret".
+3. Abre js/config.js y pegalas entre las comillas (url y key). Guarda.
+   Alternativa sin tocar archivos: en la app, Menu > "Conectar servidor" y pegalas ahi (solo queda en ese telefono).
+
+PASO 4 - Volver a compilar el APK y entrar
+- Sube los archivos a GitHub como siempre y compila. Al abrir la app pedira usuario y contrasena.
+- Administrador inicial: usuario "admin". La contrasena inicial esta en el script (setup.sql) y la app te obliga a cambiarla al entrar.
+
+COMO SE USA
+- Menu > Administracion: crear tecnicos (nombre, usuario, codigo tecnico), suspender, cambiar contrasena y eliminar.
+- Boton de personas (a la derecha del mapa, solo administrador): muestra en el mapa donde esta cada tecnico, con su zona
+  (municipio, cabina y caja mas cercana). Verde = activo hace menos de 3 min, amarillo = menos de 15 min, gris = mas antiguo.
+  Toca a un tecnico para ver su zona, ir con Waze hasta el o ver su ubicacion.
+- Los tecnicos comparten su ubicacion mientras la app esta abierta (aparece "Ubicacion compartida"). Si no hay internet, se envia al volver la senal.
+
+NOTAS
+- La app sigue funcionando sin internet para quien ya inicio sesion (mapa, cajas y evaluaciones). El primer inicio de sesion si necesita internet.
+- Con el plan gratis de Supabase, el proyecto se pausa tras una semana sin uso; se reactiva con un clic desde su panel.
+- Seguridad: las tablas no se pueden leer directamente; todo pasa por funciones que validan la sesion. Las contrasenas se guardan cifradas.
